@@ -1,0 +1,1 @@
+export type LoginErrorType = 'incorrect email' | 'incorrect credentials';
