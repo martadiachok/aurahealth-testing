@@ -1,8 +1,9 @@
 import { expect, Locator, Page } from '@playwright/test'
 import { url } from '../../test-data/routes';
 import { mainPageLocalization } from '../../test-data/localization/main-page';
+import { BasePage } from './BasePage';
 
-export class MainPage {
+export class MainPage extends BasePage {
     readonly page: Page
     readonly continueButton: Locator
     readonly loginButton: Locator
@@ -11,7 +12,7 @@ export class MainPage {
 
     // TODO: replace locator with data-testid when it will be done on FE
     constructor(page: Page) {
-        this.page = page;
+        super(page);
         this.continueButton = page.locator('[class="block_cta-control"] [class="btn__primary-signup glow w-button"]');
         this.loginButton = page.locator('[class="btn__secondary login w-button"]');
         this.title = page.locator('[class="h1__hero"]');
@@ -19,8 +20,7 @@ export class MainPage {
     };
 
     async openUrl() {
-        await this.page.goto(url.main);
-        await this.page.waitForURL(url.main);
+        await super.openUrl(url.main);
     };
 
     async clickContinueButton() {

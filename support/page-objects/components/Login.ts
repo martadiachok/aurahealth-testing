@@ -65,6 +65,8 @@ export class Login {
             case 'incorrect credentials':
                 errorNotificationText = loginLocalization.incorrectCredentialsErrorMessage;
                 break;
+            default:
+                throw new Error('This error type do not exist');
         }
         await expect(this.errorToastNotification).toHaveText(errorNotificationText);
     };

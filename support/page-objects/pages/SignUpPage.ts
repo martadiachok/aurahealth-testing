@@ -2,8 +2,9 @@ import { expect, Locator, Page } from '@playwright/test'
 import { endpoints, url } from '../../test-data/routes'
 import { onboardingTopicItems, signUpPageLocalization } from '../../test-data/localization/sign-up-page'
 import { recommendedItemList } from '../../test-data/mocks/sign-up-page'
+import { BasePage } from './BasePage'
 
-export class SignUpPage {
+export class SignUpPage extends BasePage {
     readonly page: Page
     readonly continueButton: Locator
     readonly description: Locator
@@ -14,7 +15,7 @@ export class SignUpPage {
 
     // TODO: replace locator with data-testid when it will be done on FE
     constructor(page: Page) {
-        this.page = page;
+        super(page);
         this.continueButton = page.locator('[data-testid="continueButton"]');
         this.description = page.locator('[class="font custom-font body b64 undefined left"]');
         this.title = page.locator('[class="font custom-font h2-small b100 semibold left"]');
@@ -24,8 +25,7 @@ export class SignUpPage {
     };
 
     async openUrl() {
-        await this.page.goto(url.signUp);
-        await this.page.waitForURL(url.signUp);
+        await super.openUrl(url.signUp);
     };
 
     async mockRecommendedItemList() {
